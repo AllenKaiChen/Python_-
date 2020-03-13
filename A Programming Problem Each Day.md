@@ -1,5 +1,5 @@
 # 每日一题
-## 2019.3.11
+## 2019.3.11 Easy
 给你一个整数数组 A，只有可以将其划分为三个和相等的非空部分时才返回 true，否则返回 false。
 形式上，如果可以找出索引 i+1 < j 且满足 (A[0] + A[1] + ... + A[i] == A[i+1] + A[i+2] + ... + A[j-1] == A[j] + A[j-1] + ... + A[A.length - 1]) 就可以将数组三等分。
 链接：https://leetcode-cn.com/problems/partition-array-into-three-parts-with-equal-sum
@@ -89,7 +89,7 @@ class Solution:
 
 
 
-## 2019.3.12
+## 2019.3.12 Easy Math Problem
 对于字符串 S 和 T，只有在 S = T + ... + T（T 与自身连接 1 次或多次）时，我们才认定 “T 能除尽 S”。
 返回最长字符串 X，要求满足 X 能除尽 str1 且 X 能除尽 str2。
 链接：https://leetcode-cn.com/problems/greatest-common-divisor-of-strings
@@ -141,4 +141,37 @@ class Solution:
         if str1 + str2 == str2 + str1:
             return candidate
         return ''
+```
+
+## 2019.3.13 Easy
+给定一个大小为 n 的数组，找到其中的多数元素。多数元素是指在数组中出现次数大于 ⌊ n/2 ⌋ sy的元素。
+你可以假设数组是非空的，并且给定的数组总是存在多数元素。
+链接：https://leetcode-cn.com/problems/majority-element
+
+
+**示例 1：**
+
+```
+输入：[3,2,3]
+输出：3
+```
+
+**示例 2：**
+
+```
+输入：[2,2,1,1,1,2,2]
+输出：2
+```
+
+**注意：**
+
+- 考虑先排序再取中间那个元素
+ 
+### 代码 Python
+
+```python3
+class Solution:
+    def majorityElement(self, nums):
+        nums.sort()
+        return nums[len(nums)//2]
 ```
