@@ -192,7 +192,7 @@ class Solution:
 
 **注意：**
 
-- 采用二分查找或者二分
+- 采用DP或者二分
 - 采用DP时：dp[i]=max(dp[j])+1,其中0≤j<i且num[j]<num[i]，时间复杂度O(n^2),空间复杂度O(n)
  
 ### 代码 Python
