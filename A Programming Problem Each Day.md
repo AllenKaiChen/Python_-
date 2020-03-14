@@ -175,3 +175,39 @@ class Solution:
         nums.sort()
         return nums[len(nums)//2]
 ```
+
+
+## 2019.3.14 Medium DP
+给定一个无序的整数数组，找到其中最长上升子序列的长度。
+
+
+**示例 1：**
+
+```
+输入：[10,9,2,5,3,7,101,18]
+输出：4
+解释：最长的上升子序列是 [2,3,7,101]，它的长度是 4。
+```
+
+
+**注意：**
+
+- 采用二分查找或者二分
+- 采用DP时：dp[i]=max(dp[j])+1,其中0≤j<i且num[j]<num[i]，时间复杂度O(n^2),空间复杂度O(n)
+ 
+### 代码 Python
+
+```python3
+class Solution:
+    def lengthOfLIS(self, nums: List[int]) -> int:
+        if not nums:
+            return 0
+        dp_len = []
+        #dp_len = [1] * len(nums)
+        for i in range(len(nums)):
+            dp_len.append(1)
+            for j in range(i):
+                if nums[i] > nums[j]:
+                    dp_len[i] = max(dp_len[i], dp_len[j] + 1) 
+        return max(dp_len)
+```
