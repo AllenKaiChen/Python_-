@@ -211,3 +211,93 @@ class Solution:
                     dp_len[i] = max(dp_len[i], dp_len[j] + 1) 
         return max(dp_len)
 ```
+
+
+
+## 2019.3.15 Medium DFS
+### 深度优先搜索
+给定一个包含了一些 0 和 1的非空二维数组 grid , 一个 岛屿 是由四个方向 (水平或垂直) 的 1 (代表土地) 构成的组合。你可以假设二维矩阵的四个边缘都被水包围着。
+找到给定的二维数组中最大的岛屿面积。(如果没有岛屿，则返回面积为0。)
+<https://leetcode-cn.com/problems/max-area-of-island>
+
+
+
+**示例 1：**
+
+```
+[[0,0,1,0,0,0,0,1,0,0,0,0,0],
+ [0,0,0,0,0,0,0,1,1,1,0,0,0],
+ [0,1,1,0,1,0,0,0,0,0,0,0,0],
+ [0,1,0,0,1,1,0,0,1,0,1,0,0],
+ [0,1,0,0,1,1,0,0,1,1,1,0,0],
+ [0,0,0,0,0,0,0,0,0,0,1,0,0],
+ [0,0,0,0,0,0,0,1,1,1,0,0,0],
+ [0,0,0,0,0,0,0,1,1,0,0,0,0]]
+
+对于上面这个给定矩阵应返回 6。注意答案不应该是11，因为岛屿只能包含水平或垂直的四个方向的‘1’。
+```
+**示例 2：**
+
+```
+[[0,0,0,0,0,0,0,0]]
+
+对于上面这个给定的矩阵, 返回 0。
+```
+
+**注意：**
+
+- 给定的矩阵grid 的长度和宽度都不超过 50。
+- 采用FPP时：时间复杂度O(R∗C)。其中 R 是给定网格中的行数，C 是列数,每个网格最多一次。空间复杂度O(n),递归的深度最大可能是整个网格的大小，因此最大可能使用 O(R∗C)的栈空间。
+ 
+### 代码 Python
+
+```python3
+class Solution:
+
+    def dfp(self, grid, i, j):
+        if i < 0 or j < 0 or i == len(grid) or j == len(grid[0]) or grid[i][j] != 1:
+            return 0
+        grid[i][j] = 0
+        return 1 + self.dfp(grid, i - 1, j) + self.dfp(grid, i + 1, j) + self.dfp(grid, i, j - 1) + self.dfp(grid, i, j + 1)
+
+
+    def maxAreaOfIsland(self, grid: List[List[int]]) -> int:
+        Height = len(grid)
+        if Height < 1:
+            return 0
+        Width = len(grid[0])
+        res = 0
+
+        for h in range(Height):
+            for w in range(Width):
+                if grid[h][w] == 1:
+                    res = max(res, self.dfp(grid, h, w))
+        return res
+```
+
+### 代码 Python 更快的解答过程
+```python3
+class Solution:
+    def maxAreaOfIsland(self, grid: List[List[int]]) -> int:
+        a = grid
+        col = len(a)
+        row = len(a[0])
+        def dfs(arr,i,j):
+            count = 1
+            arr[i][j] = 0
+            if i-1>=0 and arr[i-1][j]==1:
+                count+=dfs(arr,i-1,j)
+            if i+1<col and arr[i+1][j]==1:
+                count+=dfs(arr,i+1,j)
+            if j-1>=0 and arr[i][j-1]==1:
+                count+=dfs(arr,i,j-1)
+            if j+1<row and arr[i][j+1]==1:
+                count+=dfs(arr,i,j+1)
+            return count
+        maxs = 0
+        for i in range(col):
+            for j in range(row):
+                if a[i][j] ==1:
+                    maxs = max(maxs,dfs(a,i,j))
+        return maxs
+```
