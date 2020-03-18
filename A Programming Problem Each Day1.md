@@ -199,3 +199,68 @@ public:
     }
 };
 ```
+
+
+## 2019.3.18 Easy 矩形重叠
+### Math
+矩形以列表 [x1, y1, x2, y2] 的形式表示，其中 (x1, y1) 为左下角的坐标，(x2, y2) 是右上角的坐标。
+如果相交的面积为正，则称两矩形重叠。需要明确的是，只在角或边接触的两个矩形不构成重叠。
+给出两个矩形，判断它们是否重叠并返回结果。
+<https://leetcode-cn.com/problems/rectangle-overlap/>
+
+**示例 1：**
+
+```
+输入：rec1 = [0,0,2,2], rec2 = [1,1,3,3]
+输出：true
+
+```
+**示例 2：**
+
+```
+输入：rec1 = [0,0,1,1], rec2 = [1,0,2,1]
+输出：false
+```
+
+**注意：**
+
+- 时间复杂度：O(1)， 空间复杂度：O(1)
+- 逆向思维：矩形如果不重叠，从x轴和y轴上看两个矩形就变成了两条线段，这两条线段肯定是不相交的，也就是说左边的矩形的最右边小于右边矩形的最左边，也就是rec1[2] < rec2[0] || rec2[2] < rec1[0]；y轴同理，下面的矩形的最上边小于上面矩形的最下边，也就是rec1[3] < rec2[1] || rec2[3] < rec1[1]。因为题目要求重叠算相离，所以加上=，最后取反。
+
+### 代码 Python 逆向解
+
+```python3
+class Solution(object):
+    def isRectangleOverlap(self, rec1, rec2):
+        return not (rec1[2] <= rec2[0] or  # left
+                    rec1[3] <= rec2[1] or  # bottom
+                    rec1[0] >= rec2[2] or  # right
+                    rec1[1] >= rec2[3])    # top
+```
+
+### 代码 Python 正向解
+```python3 
+class Solution:
+    def isRectangleOverlap(self, rec1: List[int], rec2: List[int]) -> bool:
+
+        w1 = rec1[2] - rec1[0]
+        h1 = rec1[3] - rec1[1]
+        w2 = rec2[2] - rec2[0]
+        h2 = rec2[3] - rec2[1]
+
+        if rec1[2] > rec2[2]:
+            w_distance = rec1[2] - rec2[0]
+        else:
+            w_distance = rec2[2] - rec1[0]
+
+        if rec1[3] > rec2[3]:
+            h_distance = rec1[3] - rec2[1]
+        else:
+            h_distance = rec2[3] - rec1[1]
+
+        if w_distance < (w1 + w2) and h_distance < (h1 + h2):
+            return True
+        else:
+            return False
+```
+
