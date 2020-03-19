@@ -294,7 +294,7 @@ class Solution:
 - 注意这种写法 c = collections.Counter(s)
 
 
-### 代码 Python 逆向解
+### 代码 Python 
 
 ```python3
 class Solution:
