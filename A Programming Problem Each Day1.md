@@ -307,3 +307,39 @@ class Solution:
         return res if res == len(s) else res + 1
 ```
 
+
+
+## 2019.3.20 Easy 最小的k个数
+
+输入整数数组 arr ，找出其中最小的 k 个数。例如，输入4、5、1、6、2、7、3、8这8个数字，则最小的4个数字是1、2、3、4。
+<https://leetcode-cn.com/problems/zui-xiao-de-kge-shu-lcof/>
+
+**示例 1：**
+
+```
+输入：arr = [3,2,1], k = 2
+输出：[1,2] 或者 [2,1]
+
+```
+**示例 2：**
+```
+输入：arr = [0,1,2,1], k = 1
+输出：[0]
+
+```
+
+
+**注意：**
+
+- 多种解法，以下给的第一种解法并不能让面试官满意，建议去看剑指Offer原题解法
+
+
+### 代码 Python 
+
+```python3
+class Solution:
+    def getLeastNumbers(self, arr: List[int], k: int) -> List[int]:
+        arr.sort()
+        return arr[: k]
+```
+
