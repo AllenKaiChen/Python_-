@@ -119,3 +119,47 @@ class Solution:
             dp_cur = dp_next
         return dp_next
 ```
+
+
+### Math Easy 三维形体的表面积
+
+在 N * N 的网格上，我们放置一些 1 * 1 * 1  的立方体。
+每个值 v = grid[i][j] 表示 v 个正方体叠放在对应单元格 (i, j) 上。
+请你返回最终形体的表面积。
+<https://leetcode-cn.com/problems/surface-area-of-3d-shapes>
+
+**示例 1：**
+
+```
+输入：[[2]]
+输出：10
+
+```
+**示例 2：**
+
+```
+输入：[[1,2],[3,4]]
+输出：34
+
+```
+
+**注意：**
+
+- 时间复杂度：O(N^2)， 空间复杂度：O(1)
+
+### 代码 Python
+
+```python3
+class Solution:
+    def surfaceArea(self, grid: List[List[int]]) -> int:
+        res = 0
+        for i in range(len(grid)):
+            for j in range(len(grid[0])):
+                if grid[i][j] != 0:
+                    res += grid[i][j] * 4 + 2
+                if i > 0:
+                    res -= min(grid[i][j], grid[i-1][j]) * 2
+                if j > 0:
+                    res -= min(grid[i][j], grid[i][j-1]) * 2
+        return res
+```
