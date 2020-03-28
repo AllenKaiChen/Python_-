@@ -1,5 +1,5 @@
 # 每日一题 Week3
-### 双指针2019.2.23
+### 双指针2019.3.23
 给定一个带有头结点 head 的非空单链表，返回链表的中间结点。
 如果有两个中间结点，则返回第二个中间结点。
 <https://leetcode-cn.com/problems/middle-of-the-linked-list/>
@@ -77,7 +77,7 @@ class Solution:
 ```
 
 
-### DP 动态规划 2019.2.24
+### DP 动态规划 2019.3.24
 
 一个有名的按摩师会收到源源不断的预约请求，每个预约都可以选择接或不接。在每次预约服务之间要有休息时间，因此她不能接受相邻的预约。给定一个预约请求序列，替按摩师找到最优的预约集合（总预约时间最长），返回总的分钟数。
 <https://leetcode-cn.com/problems/the-masseuse-lcci/>
@@ -121,7 +121,7 @@ class Solution:
 ```
 
 
-### Math Easy 三维形体的表面积 2019.2.25
+### Math Easy 三维形体的表面积 2019.3.25
 
 在 N * N 的网格上，我们放置一些 1 * 1 * 1  的立方体。
 每个值 v = grid[i][j] 表示 v 个正方体叠放在对应单元格 (i, j) 上。
@@ -166,7 +166,7 @@ class Solution:
 
 
 
-### 方向数组 Easy 车的可用捕获量 2019.2.26
+### 方向数组 Easy 车的可用捕获量 2019.3.26
 
 在一个 8 x 8 的棋盘上，有一个白色车（rook)。也可能有空方块，白色的象（bishop）和黑色的卒（pawn）。它们分别以字符 “R”，“.”，“B” 和 “p” 给出。大写字符表示白棋，小写字符表示黑棋。
 车按国际象棋中的规则移动：它选择四个基本方向中的一个（北，东，西和南），然后朝那个方向移动，直到它选择停止、到达棋盘的边缘或移动到同一方格来捕获该方格上颜色相反的卒。另外，车不能与其他友方（白色）象进入同一个方格。
@@ -208,7 +208,7 @@ class Solution:
 
 
 
-### GCD 卡牌分组 2019.2.27
+### GCD 卡牌分组 2019.3.27
 
 给定一副牌，每张牌上都写着一个整数。此时，你需要选定一个数字 X，使我们可以将整副牌按下述规则分成 1 组或更多组：
 #### 每组都有X张牌。
@@ -263,5 +263,33 @@ class Solution(object):
         from fractions import gcd
         vals = collections.Counter(deck).values()
         return reduce(gcd, vals) >= 2
+
+```
+
+### 单词的压缩编码 Medium  2019.3.28
+
+给定一个单词列表，我们将这个列表编码成一个索引字符串 S 与一个索引列表 A。
+例如，如果这个列表是 ["time", "me", "bell"]，我们就可以将其表示为 S = "time#bell#" 和 indexes = [0, 2, 5]。
+对于每一个索引，我们可以通过从字符串 S 中索引的位置开始读取字符串，直到 "#" 结束，来恢复我们之前的单词列表。
+那么成功对给定单词列表进行编码的最小字符串长度是多少呢？
+<https://leetcode-cn.com/problems/short-encoding-of-words>
+
+
+
+**注意：**
+
+- 注意字典树
+
+### 代码 Python
+
+```python3
+class Solution:
+    def minimumLengthEncoding(self, words: List[str]) -> int:
+        good = set(words)
+        for word in words:
+            for k in range(1, len(word)):
+                good.discard(word[k:])
+
+        return sum(len(word) + 1 for word in good)
 
 ```
