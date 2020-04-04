@@ -146,3 +146,34 @@ class Solution:
         return res
 
 ```
+
+### 接雨水1 Hard 2019.4.4
+给定 n 个非负整数表示每个宽度为 1 的柱子的高度图，计算按此排列的柱子，下雨之后能接多少雨水。
+<https://leetcode-cn.com/problems/trapping-rain-water/>
+
+
+### 代码 Python
+
+```python3
+class Solution:
+    def trap(self, height: List[int]) -> int:
+        n = len(height)
+        if n == 0:
+            return 0
+        left = 0
+        right = n -1
+        res = 0
+        l_max = height[0]
+        r_max = height[n-1]
+        while left <= right:
+            l_max = max(height[left], l_max)
+            r_max = max(height[right], r_max)
+            if l_max < r_max:
+                res += l_max - height[left]
+                left += 1
+            else:
+                res += r_max - height[right]
+                right -= 1
+        return res
+
+```
