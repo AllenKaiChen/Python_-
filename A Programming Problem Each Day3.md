@@ -177,3 +177,27 @@ class Solution:
         return res
 
 ```
+
+### 括号生成 Medium 2019.4.9
+数字 n 代表生成括号的对数，请你设计一个函数，用于能够生成所有可能的并且 有效的 括号组合。
+<https://leetcode-cn.com/problems/generate-parentheses/>
+
+
+### 代码 Python
+
+```python3
+class Solution:
+    def generateParenthesis(self, n: int) -> List[str]:
+        res = []
+        def dfs(l, r, curStr):
+            if l == 0 and r == 0:
+                res.append(curStr)
+                return
+            if l > 0:
+                dfs(l -1, r, curStr + '(')
+            if l < r:
+                dfs(l, r - 1, curStr + ')')
+        
+        dfs(n, n, '')
+        return res
+```
